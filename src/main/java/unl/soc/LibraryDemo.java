@@ -34,16 +34,16 @@ public class LibraryDemo {
 			String tokens[] = line.split(",");
 			String title = tokens[0];
 			String auth[] = tokens[1].split(" ");
-			Author author = new Author(author.setFirstName(auth[0]), author.setLastName(auth[1]));
-			//author.setFirstName(auth[0]);
-			//author.setLastName(auth[1]);
+			Author author = new Author(auth[0], auth[1]);
+			//author.firstName = auth[0];
+			//author.lastName = auth[1];
 			String isbn = tokens[2];
-			String publishDate = tokens[3];
-			Book b = new Book();
-			b.setTitle(title);
-			b.setAuthor(author);
-			b.setISBN(isbn);
-			b.setPublishDate(publishDate);
+			LocalDate publishDate = LocalDate.parse(tokens[3]);
+			Book b = new Book(title, author, isbn, publishDate);
+			//b.setTitle(title);
+			//b.setAuthor(author);
+			//b.setISBN(isbn);
+			//b.setPublishDate(publishDate);
 			lib.addBook(b);
 		}
 		s.close();
