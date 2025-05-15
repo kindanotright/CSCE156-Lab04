@@ -2,6 +2,7 @@ package unl.soc;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Scanner;
 
@@ -33,9 +34,9 @@ public class LibraryDemo {
 			String tokens[] = line.split(",");
 			String title = tokens[0];
 			String auth[] = tokens[1].split(" ");
-			Author author = new Author();
-			author.firstName = auth[0];
-			author.lastName = auth[1];
+			Author author = new Author(author.setFirstName(auth[0]), author.setLastName(auth[1]));
+			//author.setFirstName(auth[0]);
+			//author.setLastName(auth[1]);
 			String isbn = tokens[2];
 			String publishDate = tokens[3];
 			Book b = new Book();
@@ -78,17 +79,33 @@ public class LibraryDemo {
 
 	private void printBooks(List<Book> books) {
 
-		System.out.print("\n");
-		System.out.println(String.format("%-50s %-20s %-15s", "TITLE", "AUTHOR", "ISBN"));
+		System.out.println("\n");
+		System.out.println(String.format("%-50s %-20s %-15s %-5s", "Title", "Author", "ISBN", "Publish Year", "Age"));
+
 		for (Book b : books) {
-			String formattedAuthor = null;
+			String formattedAuthor = "";
 			if (b.getAuthor() != null) {
-				formattedAuthor = b.getAuthor().lastName + ", " + b.getAuthor().lastName;
+				formattedAuthor = b.getAuthor().getLastName() + ", " + b.getAuthor().getFirstName();
 			}
-			String line = String.format("%-50s %-20s %-15s", b.getTitle(), formattedAuthor, b.getISBN());
+			String publishYear = b.getPublishDate();
+			int age = b.getAge();
+			String line = String.format("%-50s %-20s %-15s %-15s %-5d", b.getTitle(), formattedAuthor, b.getISBN(),
+					publishYear, age);
 			System.out.println(line);
+
 		}
-		System.out.print("\n\n");
+
+//		System.out.print("\n");
+//		System.out.println(String.format("%-50s %-20s %-15s", "TITLE", "AUTHOR", "ISBN"));
+//		for (Book b : books) {
+//			String formattedAuthor = null;
+//			if (b.getAuthor() != null) {
+//				formattedAuthor = b.getAuthor().lastName + ", " + b.getAuthor().lastName;
+//			}
+//			String line = String.format("%-50s %-20s %-15s", b.getTitle(), formattedAuthor, b.getISBN());
+//			System.out.println(line);
+//		}
+//		System.out.print("\n\n");
 	}
 
 	/**
@@ -107,11 +124,11 @@ public class LibraryDemo {
 		System.out.println("Enter the ISBN of the book: ");
 		String isbn = STDIN.nextLine();
 		System.out.println("Enter the publication date (YYYY-MM-DD)");
-		String publishDate = STDIN.nextLine();
-		Author author = new Author();
-		author.firstName = firstName;
-		author.lastName = lastName;
-		Book b = new Book();
+		LocalDate publishDate = LocalDate.parse(STDIN.nextLine());
+		Author author = new Author(firstName, lastName);
+		//author.firstName = firstName;
+		//author.lastName = lastName;
+		Book b = new Book(title, author, isbn, publishDate);
 		b.setTitle(title);
 		b.setAuthor(author);
 		b.setISBN(isbn);

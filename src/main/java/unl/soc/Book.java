@@ -1,6 +1,7 @@
 package unl.soc;
 
 import java.time.LocalDate;
+import java.time.Period;
 
 /**
  * This class models an individual book.
@@ -25,7 +26,7 @@ public class Book {
      * @return
      */
     public Author getAuthor() {
-        return null;
+        return this.author;
     }
 
     /**
@@ -41,7 +42,7 @@ public class Book {
      * @return
      */
     public String getISBN() {
-        return null;
+        return this.isbn;
     }
 
     /**
@@ -57,7 +58,7 @@ public class Book {
      * @return
      */
     public String getTitle() {
-        return null;
+        return this.title;
     }
 
     /**
@@ -78,10 +79,13 @@ public class Book {
     
     /**
      * Setter method for the publish date
-     * @param date
+     * @param publishDate2
      */
-    public void setPublishDate(String date) {
-    	this.publishDate = LocalDate.parse(date);
+    public void setPublishDate(LocalDate publishDate) {
+    	this.publishDate = publishDate;
     }
     
+    public int getAge() {
+    	return Period.between(this.publishDate, LocalDate.now()).getYears();
+    }
 }
