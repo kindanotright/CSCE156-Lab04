@@ -13,6 +13,13 @@ public class Book {
     private Author author;
     private LocalDate publishDate;
 
+    public Book(String title, Author author, String isbn, LocalDate publishDate) {
+    	this.title = title;
+    	this.author = author;
+    	this.isbn = isbn;
+    	this.publishDate = publishDate;
+    }
+    
     /**
      * Getter method for author
      * @return

@@ -44,8 +44,8 @@ public class Library {
     public List<Book> authorSearch(String term) {
     	List<Book> results = new ArrayList<Book>();
     	for(Book b : this.bookCollection) {
-    		if(b.getAuthor().firstName.toLowerCase().contains(term.toLowerCase()) || 
-    		   b.getAuthor().lastName.toLowerCase().contains(term.toLowerCase())) {
+    		if(b.getAuthor().getFirstName().toLowerCase().contains(term.toLowerCase()) || 
+    		   b.getAuthor().getLastName().toLowerCase().contains(term.toLowerCase())) {
     			results.add(b);
     		}
     	}
@@ -55,8 +55,8 @@ public class Library {
     public List<Book> keywordSearch(String term) {
     	List<Book> results = new ArrayList<Book>();
     	for(Book b : this.bookCollection) {
-    		if(b.getAuthor().firstName.toLowerCase().contains(term.toLowerCase()) || 
-    		   b.getAuthor().lastName.toLowerCase().contains(term.toLowerCase()) ||
+    		if(b.getAuthor().getFirstName().toLowerCase().contains(term.toLowerCase()) || 
+    		   b.getAuthor().getLastName().toLowerCase().contains(term.toLowerCase()) ||
     		   b.getTitle().toLowerCase().contains(term.toLowerCase()) || 
     		   b.getISBN().toLowerCase().contains(term.toLowerCase())
     		   ) {
